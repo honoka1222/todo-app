@@ -1,21 +1,6 @@
-package com.example.message.model;
-
+package com.example.todo.model;
+ 
 import jakarta.persistence.*;
-
-@Entity
-public class Message {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    private String name;
-    private String text;
-
-    public Message() {package com.example.todo.model;
-
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class Task {
@@ -65,25 +50,4 @@ public class Task {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
-}
-
-    }
-
-    public Message(String name, String text) {
-        this.name = name;
-        this.text = text;
-    }
-
-    public Integer getId(){
-        return id;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public String getText(){
-        return text;
-    }
-
 }
