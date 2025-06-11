@@ -32,4 +32,12 @@ public class Message {
         return text;
     }
 
+        public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
 }

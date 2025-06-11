@@ -21,5 +21,20 @@ public class MessageService {
           public void addMessage(String name, String text){
                repository.save(new Message(name,text));
           }
+
+    // IDでメッセージを取得
+    public Message findById(Integer id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    // メッセージを更新
+    public void updateMessage(Integer id, Message updatedMessage) {
+        Message message = repository.findById(id).orElse(null);
+        if (message != null) {
+            message.setName(updatedMessage.getName());
+            message.setText(updatedMessage.getText());
+            repository.save(message);
+        }
+    }      
     
 }
