@@ -39,4 +39,5 @@ public class TodoService {
     public Todo findById(Integer id) {
         return repository.findById(id).orElseThrow();
     }
+
 }

@@ -24,6 +24,7 @@ public class Todo {
     // 締切日（ユーザーが入力）
     private LocalDate deadline;
 
+
     // デフォルトコンストラクタ（Spring用）・completed初期値はfalse
     public Todo() {
         this.completed = false;
@@ -31,6 +32,7 @@ public class Todo {
 
     // タイトル・説明・締切を指定して新しいタスクを作成
     public Todo(String title, String description, LocalDate deadline) {
+
         this.title = title;
         this.description = description;
         this.deadline = deadline;

@@ -1,5 +1,6 @@
 package com.example.todo.controller;
 
+
 import com.example.todo.model.Todo;
 import com.example.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class TodoController {
     ) {
         service.addTodo(title, description, deadline);
         return "redirect:/todos"; // 登録後、一覧画面にリダイレクト
+
     }
 
     // タスク完了処理：POST /todos/{id}/complete
