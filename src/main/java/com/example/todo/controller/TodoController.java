@@ -1,47 +1,49 @@
 package com.example.todo.controller;
 
-
+import com.example.todo.model.Todo;
 import com.example.todo.service.TodoService;
-import com.example.todo.model.Message;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
-@Controller
+@Controller // HTMLページを返すコントローラ
+@RequestMapping("/todos") // すべて /todos で始まるURLに対応
 public class TodoController {
+
     private final TodoService service;
 
-    public TodoController(TodoService service){
-        this.service =service;
+    @Autowired
+    public TodoController(TodoService service) {
+        this.service = service;
     }
 
-    @GetMapping("/")
-    public String index(Model model){
-        List<Message> messages = service.getAllMessages();
-        model.addAttribute("messages", messages);
-        return "index";
+    // タスク一覧表示：GET /todos
+    @GetMapping
+    public String listTodos(Model model) {
+        List<Todo> todos = service.getAllTodos();
+        model.addAttribute("todos", todos); // テンプレートに渡す
+        return "todo-list"; // resources/templates/todo-list.html を返す
     }
 
-    @PostMapping("/post")
-    public String post(@RequestParam String name,
-                       @RequestParam String text,
-                       Model model) {
-        if(name.isBlank() || text.isBlank()){
-            model.addAttribute("error", "名前とメッセージは必須です");
+    // 新規タスク追加処理：POST /todos
+    @PostMapping
+    public String addTodo(
+            @RequestParam String title,
+            @RequestParam String description,
+            @RequestParam LocalDate deadline
+    ) {
+        service.addTodo(title, description, deadline);
+        return "redirect:/todos"; // 登録後、一覧画面にリダイレクト
+    }
 
-        }else{
-            service.addMessage((name), text);
-        }
-        
-        List<Message> messages = service.getAllMessages();
-        model.addAttribute("messages", messages);
-        return "index";
+    // タスク完了処理：POST /todos/{id}/complete
+    @PostMapping("/{id}/complete")
+    public String completeTodo(@PathVariable Integer id) {
+        service.completeTodo(id);
+        return "redirect:/todos";
     }
 }
-
-
-
-
