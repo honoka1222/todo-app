@@ -1,8 +1,8 @@
-package com.example.message.controller;
+package com.example.todo.controller;
 
 
-import com.example.message.service.MessageService;
-import com.example.message.model.Message;
+import com.example.todo.service.TodoService;
+import com.example.todo.model.Message;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-public class MessageController {
-    private final MessageService service;
+public class TodoController {
+    private final TodoService service;
 
-    public MessageController(MessageService service){
+    public TodoController(TodoService service){
         this.service =service;
     }
 

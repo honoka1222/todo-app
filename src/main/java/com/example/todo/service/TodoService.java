@@ -1,16 +1,16 @@
-package com.example.message.service;
+package com.example.todo.service;
 
-import com.example.message.model.Message;
-import com.example.message.repository.MessageRepository;
+import com.example.todo.model.Message;
+import com.example.todo.repository.TodoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class MessageService {
-     private final MessageRepository repository;
+public class TodoService {
+     private final TodoRepository repository;
 
-       public MessageService(MessageRepository repository){
+       public TodoService(TodoRepository repository){
            this.repository = repository;
     }
 

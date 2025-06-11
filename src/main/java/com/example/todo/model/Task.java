@@ -1,5 +1,8 @@
+
+package com.example.todo.model;
+ 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
+>>>>>>>> main:src/main/java/com/example/todo/model/Todo.java
 
 @Entity
 public class Task {
@@ -49,25 +52,4 @@ public class Task {
     public void setCompleted(boolean completed) {
         this.completed = completed;
     }
-}
-
-    }
-
-    public Message(String name, String text) {
-        this.name = name;
-        this.text = text;
-    }
-
-    public Integer getId(){
-        return id;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public String getText(){
-        return text;
-    }
-
 }
