@@ -1,33 +1,45 @@
 
 package com.example.todo.model;
- 
+
 import jakarta.persistence.*;
->>>>>>>> main:src/main/java/com/example/todo/model/Todo.java
 
+// データベースに保存されるエンティティ（テーブル）として指定
 @Entity
-public class Task {
+public class Todo {
 
+    // 主キー（ID）を自動生成
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // タスクのタイトル
     private String title;
+
+    // タスクの説明
     private String description;
 
+    // 完了フラグ（true = 完了、false = 未完了）
     private boolean completed;
 
-    private LocalDateTime createdAt;
+    // 締切日（ユーザーが入力）
+    private LocalDate deadline;
 
-    public Task() {
-        this.createdAt = LocalDateTime.now();
+
+    // デフォルトコンストラクタ（Spring用）・completed初期値はfalse
+    public Todo() {
+        this.completed = false;
     }
 
-    public Task(String title, String description) {
+    // タイトル・説明・締切を指定して新しいタスクを作成
+    public Todo(String title, String description, LocalDate deadline) {
+
         this.title = title;
         this.description = description;
+        this.deadline = deadline;
         this.completed = false;
-        this.createdAt = LocalDateTime.now();
     }
+
+    // --- Getter メソッド（値を取り出す）---
 
     public Integer getId() {
         return id;
@@ -45,11 +57,29 @@ public class Task {
         return completed;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDate getDeadline() {
+        return deadline;
     }
 
+    // --- Setter メソッド（値を設定する）---
+
+    // タイトルを変更
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    // 説明を変更
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    // 完了状態を設定（true/false）
     public void setCompleted(boolean completed) {
         this.completed = completed;
+    }
+
+    // 締切日を設定
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
     }
 }

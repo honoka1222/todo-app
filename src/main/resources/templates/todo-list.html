@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo一覧</title>
+</head>
+<body>
+    <h1>Todoリスト</h1>
+
+    <!-- タスク追加フォーム -->
+    <form th:action="@{/todos}" method="post">
+        <label>タイトル: <input type="text" name="title" required /></label><br>
+        <label>説明: <input type="text" name="description" /></label><br>
+        <label>締切日: <input type="date" name="deadline" required /></label><br>
+        <button type="submit">タスクを追加</button>
+    </form>
+
+    <hr>
+
+    <!-- タスク一覧表示 -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>タイトル</th>
+                <th>説明</th>
+                <th>締切日</th>
+                <th>完了</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        <!-- todosという属性はControllerでModelに追加されている -->
+        <tr th:each="todo : ${todos}">
+            <td th:text="${todo.id}">ID</td>
+            <td th:text="${todo.title} ?: '（タイトルなし）'">タイトル</td>
+            <td th:text="${todo.description} ?: '（説明なし）'">説明</td>
+            <td th:text="${todo.deadline} ?: '（未設定）'">締切</td>
+            <td th:text="(${todo.completed}) ? '✅' : '⏳'">状態</td>
+            <td>
+                <!-- まだ完了していない場合のみボタン表示 -->
+                <form th:if="${!todo.completed}"
+                      th:action="@{'/todos/' + ${todo.id} + '/complete'}"
+                      method="post" style="display:inline;">
+                    <button type="submit">完了にする</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
