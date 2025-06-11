@@ -25,6 +25,21 @@ public class MessageController {
         return "index";
     }
 
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Integer id, Model model) {
+        System.out.println("Editing message with ID: " + id);
+        Message message = service.findById(id);
+        model.addAttribute("message", message);
+        return "edit-message"; // thymeleafのテンプレート名
+    }
+
+    @GetMapping("/todo/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Todo todo = todoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
+        model.addAttribute("todo", todo);
+        return "edit";
+    }
+
     @PostMapping("/post")
     public String post(@RequestParam String name,
                        @RequestParam String text,
