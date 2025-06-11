@@ -1,19 +1,3 @@
-package com.example.message.model;
-
-import jakarta.persistence.*;
-
-@Entity
-public class Message {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    private String name;
-    private String text;
-
-    public Message() {package com.example.todo.model;
-
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
