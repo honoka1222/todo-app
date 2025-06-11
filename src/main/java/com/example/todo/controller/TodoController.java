@@ -1,8 +1,7 @@
 package com.example.todo.controller;
 
-
 import com.example.todo.service.TodoService;
-import com.example.todo.model.Message;
+import com.example.todo.model.Todo;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,23 +19,22 @@ public class TodoController {
 
     @GetMapping("/")
     public String index(Model model){
-        List<Message> messages = service.getAllMessages();
-        model.addAttribute("messages", messages);
+        List<Todo> todos = service.getAllTodos();
+        model.addAttribute("todos", todos);
         return "index";
     }
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Integer id, Model model) {
-        System.out.println("Editing message with ID: " + id);
-        Message message = service.findById(id);
-        model.addAttribute("message", message);
-        return "edit-message"; // thymeleafのテンプレート名
+        System.out.println("Editing todo with ID: " + id);
+        Todo todo = service.findById(id);
+        model.addAttribute("todo", todo);
+        return "edit-todo"; // thymeleafのテンプレート名
     }
 
     @GetMapping("/todo/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        Todo todo = todoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid ID"));
-        model.addAttribute("todo", todo);
+    public String showEditForm(@PathVariable Long id) {
+        // TODO: ここでIDに基づいてTodoを取得し、モデルに追加する
         return "edit";
     }
 
@@ -48,11 +46,11 @@ public class TodoController {
             model.addAttribute("error", "名前とメッセージは必須です");
 
         }else{
-            service.addMessage((name), text);
+            service.addTodo(name, text);
         }
-        
-        List<Message> messages = service.getAllMessages();
-        model.addAttribute("messages", messages);
+
+        List<Todo> todos = service.getAllTodos();
+        model.addAttribute("todos", todos);
         return "index";
     }
 }

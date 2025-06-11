@@ -1,9 +1,11 @@
 package com.example.todo.model;
  
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
 @Entity
-public class Task {
+public class Todo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,11 +18,11 @@ public class Task {
 
     private LocalDateTime createdAt;
 
-    public Task() {
+    public Todo() {
         this.createdAt = LocalDateTime.now();
     }
 
-    public Task(String title, String description) {
+    public Todo(String title, String description) {
         this.title = title;
         this.description = description;
         this.completed = false;

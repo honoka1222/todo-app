@@ -1,6 +1,6 @@
 package com.example.todo.service;
 
-import com.example.todo.model.Message;
+import com.example.todo.model.Todo;
 import com.example.todo.repository.TodoRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +14,16 @@ public class TodoService {
            this.repository = repository;
     }
 
-        public List<Message> getAllMessages(){
-                 return repository.findAll();
-        }
+     public List<Todo> getAllTodos(){
+               return repository.findAll();
+     }
 
-          public void addMessage(String name, String text){
-               repository.save(new Message(name,text));
-          }
-    
+     public void addTodo(String title, String description){
+          repository.save(new Todo(title, description));
+     }
+
+     public Todo findById(Integer id) {
+          return repository.findById(id)
+                  .orElseThrow(() -> new IllegalArgumentException("Invalid ID: " + id));
+     }
 }
